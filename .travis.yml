@@ -10,6 +10,8 @@ env:
   - secure: "EzUB7cfuk3t1Ve1sxpKa0twzSf2RH8MnjC6w7jl4sr7Kl/Iusr3q5ALSBgtbB6e30cpjdgPeBzDnU71WSIjmRW2Q0LBuu7ReIsQ/HkOHsrIdhYW0RjNFT443wiMdmap+FnQaFb0BlQZUpFhEYQ8+2eXCKJMf/fzr8/VqRfBi93CgoK1EnvReGXMYa5gKrVtbx2X7zEDUA/erm6OD0RrSbd2PEUsCP+ee84kvFcvAKNAFA9vPQLnJgk5QCspdfZ7BzGjsMTSAccPgOsGd/vpj5EVU/fQprDcFUm6y88gEfIxixCKztc28uAc8ELvcoM2vZiDZIIAfi+FnYdj3FaV+6VffyV7HT37vEDGw7Kdj6F6FrO0ihaSo5JeB9+2BDS6M23EgmuzGJSyb3b2gOYv3gA3ASEAaRrBloMyx9dz8Kljl5xPXgBhV4O6WTP+xQMOLMmjj586WlJX3MRcKDo4dHEpaB9j9pIERrk+aFzJOiiIbZFgTj5z2rBN7PdGpbVxchbX3qih4LYfDGr8FWKiAmIhC2hUyceVXj7OFJx4nDjgYN3PyTysrQZ1+v9z7d0V1cvhzcnOtmEc7lGUZ5nooEGDYdMAYUDPsOM2MvzGxeNblssOMwxl2YMiOjzut/dpwp5aocaPnlWR5u7mHB+0qVzV/u0OMA/tuTvRE2iOdF/A="
   - BLUEMIX_ORGANIZATION: cf-react-cicd-demo
   - BLUEMIX_SPACE: cf-react-cicd-demo
+  # COVERALLS_REPO_TOKEN: 
+  - secure: "ZC6Ou5Qw2QeWWymIjFL6y4cbh6tk49xZsRMCVI2eGlUqt+V/ete9eGv+x9twHdSX7W104mAewNX15+GYjWRJvexilnaYTEituuITpcqZt90Y2jKBQIsltuWQzo1UwBV5MD2xU9S9LsUL/5w+vqqx0LDj4BQqkX1sBiWlWJBdGb8C+uH136T4WgBlQwyI3ke8EEyW8qdjQbL84WC1lU/L6jpKf1XUX0RgBwyG1xtAKZ5I8N/YeDdevjpUdd3mw0+UPTypIjurErSw57gnYEw0ljsBTLPwEukP/Gv11dByeGtCb8pmCJIY6o/evkFSaDR7XnNouk2yWJjZuLC8D5F20wgC3VtWMohJBHO7DLs5LykTv9YUh8Yv4yDLU5joEbDWPCgyl1f/Z8OaW7MJASHKQCks4J9R54ItPuIpD9zcDm/obAnx4b7zYw/ZMGTwIomzjoQ6NriH0TJJPssJ7jN0NYChB2iW1GnQYHO2U10sdU8WHcxgtiS2xN/toagk2sPELFY3l+gXJkEl1I7NMWP3Um+uag+KJOzb9m7KUlhGtbJDoKLxvvqmhIbl3eXU1yS4CoZB1qbWCpInMcZPkjqEe0U82MGsodD055GfXebuCbho3Ra+gMjNGJx3I+gl7ByEzbb0517A37Zxynx1cL3TrSsJbq4GZjkIisFXCEhTZfo="
 install: false
 jobs:
   include:
@@ -23,3 +25,7 @@ jobs:
     script:
     - chmod +x deploy.sh
     - ./deploy.sh
+notifications:
+  email:
+    - one@example.com
+    - other@example.com
