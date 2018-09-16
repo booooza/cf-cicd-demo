@@ -3,8 +3,24 @@ sudo: required
 services:
   - docker
 
-install: 
-  - docker build -t cf-cicd-demo .
+env:
+  global:
+    - DOCKER_USER=booooza
+    # DOCKER_PASS=...
+    - secret: "nXwIh5t5SvrYSXQt9J/tYSZumPKT9ayVFh4wUswNW0ihrBxFjUUHc+2tcr9s33/CmMfYgfDOMt34rzaE1BfEG5Zv/D3ozdX1Cx0FLHjkdbxpDvvEt5eh/TbkxQiQsmJGhGh8ckFEnntBJ5X7tx9hW0QBpqWhRm2+1pFoUNHiHn9NVt0Rmvu9+ZmgjXENk9iYb9jXnhraoQVr/yVQ6qvJ673ED8lWZ8XELvGI9eMzVw3YCXgOE3Lz/qMP5ixbRw7HjVE7VD5kUVw5HoRCQFQzudNQf5E/5llTO7+t3hyRI4Rj9s8I4464iSLUYGNW0MZwuPlGOhZ4xwOZghbHwoXCbCYJgkrelB+pw/QEXoQvCzmSKbTAOeFmwNv1yWzBQmw9ItkJG08JeTE2YjKq2Df+B5HlPw9SVyQ7aUA/ri4CtJS5QtWKUgFcnLBEzU8EYTVtPB5Oj4Wcc1NAB9wqFa6DnNRsNIOzazbLU8aQcJdJQ1XIm5HYb0A4r4n2QQp/B40pDjouai0hilGpv5vZcd6oxsa7uYE0WkEajFVdI+BEm16weJB2YoqtoKx4P/Iqzq1IjN/7qbs5lDe6RjJwgmHllBpKDT34zUJjquSRd7L1BdxglaBiEESKz67gnVtbN7KLa1U+nqVE6M6/mY5o17DNwAhyIIJa6lXYyKYknCvtrww="
 
-script:
-  - docker run -p 80:80 cf-cicd-demo
+jobs:
+  include:
+    - stage: test & build docker image
+      install: 
+      - docker build -t cf-react-cicd-demo .
+      after_install:
+      - docker tag cf-react-cicd-demo $DOCKER_USER/cf-react-cicd-demo
+    - stage: publish docker image
+      before_deploy:
+      - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+      deploy:
+        provider: script
+        script: docker push booooza/cf-react-cicd-demo
+        on:
+          branch: master
