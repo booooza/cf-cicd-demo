@@ -1,0 +1,10 @@
+sudo: required
+
+services:
+  - docker
+
+install: 
+  - docker build -t cf-cicd-demo .
+
+script:
+  - docker run -p 80:80 cf-cicd-demo
