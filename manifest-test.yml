@@ -3,6 +3,4 @@ applications:
   memory: 256M
   instances: 1
   domain: mybluemix.net
-  name: cf-react-cicd-demo
-  host: test-cf-react-cicd-demo
   disk_quota: 1024M
