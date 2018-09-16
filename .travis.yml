@@ -6,6 +6,10 @@ env:
   global:
   - DOCKER_USER=booooza
   - secure: P63nsiS1c0oOMFFHLm/wkBe08jzppijW2bbFGCh8EcV14j8E2WA2c7L7Xs4CmLUKbP+2pXbvpZkl0XfVEkNEmMXDSIUd2dpKR4nr2XwhihCIp5yt6h/2YQY/yBaTXOpeQ0GLDaut6rWgRwpSxv9Pf5QQx/F9ACvUbwR+O8RfUcuTQxZ2XM+OX4CmhITJcskunDP0R/3Js8uIl8dYw8E2bEAQY4nZDkPEOuX+Y1FMBnSGktIdJ2vdQXOnqm5HCu/rzaDBZp5Jma8qJsvbdUDq+dejvR3BEajD7hIS7UZfBCBG5lqcylGKh50GZSEGgJz7Dei+ZKLOeq1+Fnu+cGMnS+HMkU+M5/AK2HSm7+6hat0YtqfDL6Ny5+GvY+HrlE07XAa+hzOaALoNr5Sod1kBbZVNsO9FgoJjaXj/ZCy56ch1FcCW5xXVs6//tgO3C+rSMYUWQS/LGLmxTx04iAJoPOAlGd4CkKSJBoAO0qTI5jvUaj86TE5Px1/Wo0zdKz8oCM8+3Towq2ocIDmy0P3VCummrVrwI1DPLEF4UMyaN/+X0194UaecE6FJmxqchah7IUnTnlzkhIkLm4QlptFKoKo7bOyDKcldH3gfvJB4iNDzFOLjT4F1XbHAw3ticNbMf1z1r0xYoha7fz5QedD0CDc0NzabpHoCSFzBBQrm7lA=
+  - BLUEMIX_USER: booooza@gmail.com
+  - secure: "exS+KkCei0RJvHABJiBxE3KwwcSbNVFraCgSJV1BYjd5GvNFH9Vq8Nsg8iXowEcMLkVUpt55ldbNHIx8tAz8WxDS41s+XgaIv9L9i+8IR8j+Jyv5anCPT+pC52hFF5caeleON1L/tCtrhTO+DwVHYKUb9CszwS41eQ6dYOPxr+a01xVamKrkatZ+VXP39z/lL/TaYbtctPpA0F08uZ+jibFrFoi4n2+uuvx/yziZSfCKi+1H4NMhziwUSsHf9cjpgp6DrtDvRPhoaF82NYP8qDqELH5JIra5Jf+2xcz1/St+XmP71JLhPUAYhK7E5xcP0jqsd2dOO+2hpWVcHY63JTV7kwqq+Vw3hLPBELlyrYLlhF13rfTCjFl4SHddZtm4Zby5MKsslCnLpz3k60e4lLvNU3r8mPxyJLwPnoLQjgevOt/QPe0A1gvLUH3RU1XidRGSQDA1SbB0cvecsKXY2RVvknUOqFwqAJgD8t8gceFDpTuRQzj/agKD5c/q8zq//PXr6fCa0fid17mh9KmsWw1EL5l0a8O3KMFsGf1TqNbzj8A4EctUJISotXUOCu4MaQMgjW8tvMox/jzZAAht9uw6JUiqdiPEcDKIq7q1PABLdayeFVyN67iH6u5Lh275bPXNZKHYtshGF6EJR6eGHPJCu+MSSVGk7fzobUiChvY="
+  - BLUEMIX_ORGANIZATION: cf-react-cicd-demo
+  - BLUEMIX_SPACE: cf-react-cicd-demo
 install: false
 jobs:
   include:
@@ -15,3 +19,12 @@ jobs:
     - docker tag cf-react-cicd-demo $DOCKER_USER/cf-react-cicd-demo
     - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
     - docker push "$DOCKER_USER"/cf-react-cicd-demo
+  - stage: deploy to bluemix
+    deploy:
+      provider: bluemixcloudfoundry
+      skip_cleanup: true
+      username: $BLUEMIX_USER
+      password: $BLUEMIX_PASSWORD
+      organization: $BLUEMIX_ORGANIZATION
+      space: $BLUEMIX_SPACE
+      manifest: manifest-test.yml
