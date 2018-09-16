@@ -21,4 +21,5 @@ jobs:
     - docker push "$DOCKER_USER"/cf-react-cicd-demo
   - stage: deploy to bluemix
     script:
+    - chmod +x deploy.sh
     - ./deploy.sh
