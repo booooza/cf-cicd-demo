@@ -4,10 +4,8 @@ WORKDIR /app
 COPY package*.json /app/
 RUN npm install
 COPY ./ /app/
-RUN CI=true npm test
+RUN CI=true npm test -- --coverage | node ./node_modules/coveralls/bin/coveralls.js
 RUN npm run build
-RUN npm test -- --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
-
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
 FROM nginx:1.15
