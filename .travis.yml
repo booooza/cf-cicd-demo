@@ -8,12 +8,11 @@ env:
   - secure: P63nsiS1c0oOMFFHLm/wkBe08jzppijW2bbFGCh8EcV14j8E2WA2c7L7Xs4CmLUKbP+2pXbvpZkl0XfVEkNEmMXDSIUd2dpKR4nr2XwhihCIp5yt6h/2YQY/yBaTXOpeQ0GLDaut6rWgRwpSxv9Pf5QQx/F9ACvUbwR+O8RfUcuTQxZ2XM+OX4CmhITJcskunDP0R/3Js8uIl8dYw8E2bEAQY4nZDkPEOuX+Y1FMBnSGktIdJ2vdQXOnqm5HCu/rzaDBZp5Jma8qJsvbdUDq+dejvR3BEajD7hIS7UZfBCBG5lqcylGKh50GZSEGgJz7Dei+ZKLOeq1+Fnu+cGMnS+HMkU+M5/AK2HSm7+6hat0YtqfDL6Ny5+GvY+HrlE07XAa+hzOaALoNr5Sod1kBbZVNsO9FgoJjaXj/ZCy56ch1FcCW5xXVs6//tgO3C+rSMYUWQS/LGLmxTx04iAJoPOAlGd4CkKSJBoAO0qTI5jvUaj86TE5Px1/Wo0zdKz8oCM8+3Towq2ocIDmy0P3VCummrVrwI1DPLEF4UMyaN/+X0194UaecE6FJmxqchah7IUnTnlzkhIkLm4QlptFKoKo7bOyDKcldH3gfvJB4iNDzFOLjT4F1XbHAw3ticNbMf1z1r0xYoha7fz5QedD0CDc0NzabpHoCSFzBBQrm7lA=
 jobs:
   include:
-  - stage: test & build docker image
+  - stage: build docker image
     install:
     - docker build -t cf-react-cicd-demo .
     after_install:
     - docker tag cf-react-cicd-demo $DOCKER_USER/cf-react-cicd-demo
-  - stage: publish docker image
     before_deploy:
     - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
     deploy:
